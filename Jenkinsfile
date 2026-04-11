@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Clone') {
-            steps {
-                git 'https://github.com/punith-r-18/employee-performance-system.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 bat 'mvn clean package'
