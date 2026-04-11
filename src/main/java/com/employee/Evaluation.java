@@ -8,14 +8,9 @@ public class Evaluation {
             throw new IllegalArgumentException("Invalid score");
         }
 
-        if (score >= 85) {
-            return "Excellent";
-        } else if (score >= 70) {
-            return "Good";
-        } else if (score >= 50) {
-            return "Average";
-        } else {
-            return "Poor";
-        }
+        if (score >= 85) return "Excellent";
+        else if (score >= 70) return "Good";
+        else if (score >= 50) return "Average";
+        else return "Poor";
     }
 }

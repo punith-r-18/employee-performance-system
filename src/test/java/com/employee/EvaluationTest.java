@@ -1,7 +1,8 @@
 package com.employee;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class EvaluationTest {
 
@@ -30,7 +31,7 @@ public class EvaluationTest {
     @Test
     void testInvalidInput() {
         assertThrows(IllegalArgumentException.class, () -> {
-            evaluation.evaluatePerformance(-10);
+            evaluation.evaluatePerformance(120);
         });
     }
 }
