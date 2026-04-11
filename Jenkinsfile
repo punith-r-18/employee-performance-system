@@ -5,13 +5,11 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'ls -l'
                 sh '''
                 docker run --rm \
-                -v $WORKSPACE:/workspace \
-                -w /workspace \
+                -v $WORKSPACE:/tmp/workspace \
                 maven:3.9.9-eclipse-temurin-17 \
-                mvn clean package
+                bash -c "cp -r /tmp/workspace/* /app && cd /app && mvn clean package"
                 '''
             }
         }
