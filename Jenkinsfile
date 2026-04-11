@@ -5,19 +5,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t punith3110/employee-app .'
+                sh 'docker build -t punith3110/employee-app .'
             }
         }
 
         stage('Docker Push') {
             steps {
-                bat 'docker push punith3110/employee-app'
+                sh 'docker push punith3110/employee-app'
             }
         }
     }
