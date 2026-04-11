@@ -3,27 +3,27 @@ pipeline {
 
     stages {
 
+        stage('Clone') {
+            steps {
+                git 'https://github.com/punith-r-18/employee-performance-system.git'
+            }
+        }
+
         stage('Build') {
             steps {
                 bat 'mvn clean package'
             }
         }
 
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-        }
-
         stage('Docker Build') {
             steps {
-                bat 'docker build -t employee-app .'
+                bat 'docker build -t punith3110/employee-app .'
             }
         }
 
-        stage('Run Container') {
+        stage('Docker Push') {
             steps {
-                bat 'docker run -d -p 8082:8080 employee-app'
+                bat 'docker push punith3110/employee-app'
             }
         }
     }
