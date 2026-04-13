@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout SCM') {
             steps {
-                git 'https://github.com/punith-r-18/employee-performance-system.git'
+                git branch: 'main', url: 'https://github.com/punith-r-18/employee-performance-system.git'
             }
         }
 
