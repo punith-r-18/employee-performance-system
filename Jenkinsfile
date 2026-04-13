@@ -5,13 +5,13 @@ pipeline {
 
         stage('Checkout SCM') {
             steps {
-                git branch: 'main', url: 'https://github.com/punith-r-18/employee-performance-system.git'
+                git 'https://github.com/punith-r-18/employee-performance-system.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'docker run --rm -v $PWD:/app -w /app maven:3.9.9-eclipse-temurin-17 mvn clean package'
             }
         }
 
@@ -23,10 +23,7 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                sh '''
-                docker login -u YOUR_USERNAME -p YOUR_PASSWORD
-                docker push punith3110/employee-app
-                '''
+                sh 'docker push punith3110/employee-app'
             }
         }
     }
