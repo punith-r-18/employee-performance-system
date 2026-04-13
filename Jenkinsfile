@@ -11,34 +11,23 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh '''
-                docker run --rm \
-                -v $WORKSPACE:/app \
-                -w /app \
-                maven:3.9.9-eclipse-temurin-17 \
-                mvn clean package
-                '''
+                sh 'mvn clean package'
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh '''
-                docker build -t punith3110/employee-app .
-                '''
+                sh 'docker build -t punith3110/employee-app .'
             }
         }
 
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh '''
-                    echo $PASS | docker login -u $USER --password-stdin
-                    docker push punith3110/employee-app
-                    '''
-                }
+                sh '''
+                docker login -u YOUR_USERNAME -p YOUR_PASSWORD
+                docker push punith3110/employee-app
+                '''
             }
         }
-
     }
 }
