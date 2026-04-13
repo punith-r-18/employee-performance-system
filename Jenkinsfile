@@ -3,15 +3,21 @@ pipeline {
 
     stages {
 
-        stage('Checkout SCM') {
+        stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/punith-r-18/employee-performance-system.git'
+                sh 'docker run --rm -v $PWD:/app -w /app maven:3.9.9-eclipse-temurin-17 mvn clean package'
             }
         }
 
-        stage('Build') {
+        stage('Docker Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'docker build -t punith3110/employee-app .'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                sh 'docker push punith3110/employee-app'
             }
         }
     }
